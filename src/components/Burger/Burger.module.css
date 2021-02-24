@@ -28,3 +28,25 @@
     height: 700px;
   }
 }
+
+/* Scroll-bar */
+/* Width */
+.Burger::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.Burger::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.Burger::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.Burger::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
