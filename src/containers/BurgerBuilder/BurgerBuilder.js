@@ -5,6 +5,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
+import axios from '../../axios-order';
 
 const INGREDIENT_PRICE = {
   salad: 5,
@@ -38,7 +39,28 @@ class BurgerBuilder extends Component {
 
   purchaseCancelHandler = () => this.setState({ isPurchasing: false });
 
-  purchaseContinueHandler = () => alert('You Continue!');
+  purchaseContinueHandler = () => {
+    // alert('You Continue!');
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'Moreshwar Nabar',
+        address: {
+          street: 'Teststreet 1',
+          zipCode: '400610',
+          country: 'India',
+        },
+        email: 'test@test.com',
+      },
+      deliveryMethod: 'fastest',
+    };
+
+    axios
+      .post('/orders.json', order)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+  };
 
   addIngredientHandler(type) {
     const prevCount = this.state.ingredients[type];
