@@ -70,6 +70,7 @@ class BurgerBuilder extends Component {
     for (let [ing, quant] of Object.entries(order.ingredients)) {
       query.push(`${ing}=${quant}`);
     }
+    query.push(`price=${this.state.totalPrice}`);
     const search = `?${query.join('&')}`;
     this.props.history.push('/checkout' + search);
   };
