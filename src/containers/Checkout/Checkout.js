@@ -13,6 +13,16 @@ class Checkout extends Component {
     },
   };
 
+  componentDidMount() {
+    const query = new URLSearchParams(this.props.location.search);
+    const orderIngs = {};
+    for (let param of query.entries()) {
+      orderIngs[param[0]] = +param[1];
+    }
+
+    this.setState({ ingredients: orderIngs });
+  }
+
   purchaseContinueHandler = () => {
     // alert('You Continue!');
     this.setState({ isLoading: true });
@@ -40,10 +50,17 @@ class Checkout extends Component {
       .catch(error => this.setState({ isLoading: false, isPurchasing: false }));
   };
 
+  cancelCheckoutHandler = () => {
+    console.log(this.props.history.goBack());
+  };
+
   render() {
     return (
       <div>
-        <CheckoutSummary ingredients={this.state.ingredients} />
+        <CheckoutSummary
+          ingredients={this.state.ingredients}
+          cancel={this.cancelCheckoutHandler}
+        />
       </div>
     );
   }

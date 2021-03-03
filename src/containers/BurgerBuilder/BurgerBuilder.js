@@ -66,12 +66,12 @@ class BurgerBuilder extends Component {
       deliveryMethod: 'fastest',
     };
 
-    axios
-      .post('/orders.json', order)
-      .then(response =>
-        this.setState({ isLoading: false, isPurchasing: false })
-      )
-      .catch(error => this.setState({ isLoading: false, isPurchasing: false }));
+    let query = [];
+    for (let [ing, quant] of Object.entries(order.ingredients)) {
+      query.push(`${ing}=${quant}`);
+    }
+    const search = `?${query.join('&')}`;
+    this.props.history.push('/checkout' + search);
   };
 
   addIngredientHandler(type) {
