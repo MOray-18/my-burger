@@ -40,31 +40,7 @@ class BurgerBuilder extends Component {
   purchaseCancelHandler = () => this.setState({ isPurchasing: false });
 
   purchaseContinueHandler = () => {
-    // alert('You Continue!');
-    this.setState({ isLoading: true });
-
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.props.totalPrice,
-      customer: {
-        name: 'Moreshwar Nabar',
-        address: {
-          street: 'Teststreet 1',
-          zipCode: '400610',
-          country: 'India',
-        },
-        email: 'test@test.com',
-      },
-      deliveryMethod: 'fastest',
-    };
-
-    let query = [];
-    for (let [ing, quant] of Object.entries(order.ingredients)) {
-      query.push(`${ing}=${quant}`);
-    }
-    query.push(`price=${this.props.totalPrice}`);
-    const search = `?${query.join('&')}`;
-    this.props.history.push('/checkout' + search);
+    this.props.history.push('/checkout');
   };
 
   render() {
